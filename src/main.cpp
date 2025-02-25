@@ -1,8 +1,8 @@
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image.h"
-#include "stb_image_write.h"
+#include "../header/stb_image.h"
+#include "../header/stb_image_write.h"
 
 #include "../header/gaussian.hpp"
 #include "../header/sobel.hpp"
