@@ -30,6 +30,10 @@ int main() {
     unsigned char* direction = computeGradientDirection(sobelx, sobely, width, height);
     stbi_write_jpg("./results/direction.jpg", width, height, 1, direction, 90);
 
+    unsigned char* nms = nonMaxSuppression(sobel, direction, width, height);
+    stbi_write_jpg("./results/nms.jpg", width, height, 1, nms, 90);
+
+
     delete[] image;
     delete[] gaussian;
     delete[] sobelx;
