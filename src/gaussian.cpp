@@ -1,5 +1,5 @@
 #include "../header/gaussian.hpp"
-#include <math.h>
+
 
 void generateGaussian(float kernel[KERNEL_SIZE][KERNEL_SIZE], int kSize, float sigma) {
     //Gaussian kernel needs to start from the center and move outwards

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-unsigned char* computeGradientDirection(unsigned char* sobel, int width, int height) {
+unsigned char* computeGradientDirection(unsigned char* sobelX, unsigned char* sobelY, int width, int height) {
     int pixelIndex;
     float angle;
 
@@ -13,7 +13,7 @@ unsigned char* computeGradientDirection(unsigned char* sobel, int width, int hei
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             pixelIndex = (y * width + x);   
-            angle = atan2(sobel[pixelIndex], sobel[pixelIndex]) * 180 / M_PI;
+            angle = atan2(sobelY[pixelIndex], sobelX[pixelIndex]) * 180 / M_PI;
             
             if (angle < 0) {
                 angle += 180;
@@ -26,7 +26,7 @@ unsigned char* computeGradientDirection(unsigned char* sobel, int width, int hei
     return output;
 }
 
-unsigned char* nonMaxSuppression(unsigned char* image, int width, int height) {
+unsigned char* nonMaxSuppression(unsigned char* direction, int width, int height) {
     int pixelIndex;
     int maxIntensity;
 
@@ -35,10 +35,10 @@ unsigned char* nonMaxSuppression(unsigned char* image, int width, int height) {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             pixelIndex = (y * width + x);
-            if (image[pixelIndex] < 40) {
-                image[pixelIndex] = 0;
+            if (direction[pixelIndex] < 40) {
+                direction[pixelIndex] = 0;
             }
-            output[pixelIndex] = image[pixelIndex];
+            output[pixelIndex] = direction[pixelIndex];
         } 
     }
     return output;
