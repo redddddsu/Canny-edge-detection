@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-add_executable(ced src/main.cpp src/gaussian.cpp src/nonMaxSup.cpp src/sobel.cpp)
+add_executable(ced src/main.cpp src/gaussian.cpp src/nonMaxSup.cpp src/sobel.cpp src/threshhold.cpp)

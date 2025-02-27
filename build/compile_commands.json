@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/red93/Desktop/projects/image_edge_detection/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/ced.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\ced.dir\\src\\main.cpp.obj -c C:\\Users\\red93\\Desktop\\projects\\image_edge_detection\\src\\main.cpp",
+  "file": "C:/Users/red93/Desktop/projects/image_edge_detection/src/main.cpp",
+  "output": "CMakeFiles/ced.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/red93/Desktop/projects/image_edge_detection/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/ced.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\ced.dir\\src\\gaussian.cpp.obj -c C:\\Users\\red93\\Desktop\\projects\\image_edge_detection\\src\\gaussian.cpp",
+  "file": "C:/Users/red93/Desktop/projects/image_edge_detection/src/gaussian.cpp",
+  "output": "CMakeFiles/ced.dir/src/gaussian.cpp.obj"
+},
+{
+  "directory": "C:/Users/red93/Desktop/projects/image_edge_detection/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/ced.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\ced.dir\\src\\nonMaxSup.cpp.obj -c C:\\Users\\red93\\Desktop\\projects\\image_edge_detection\\src\\nonMaxSup.cpp",
+  "file": "C:/Users/red93/Desktop/projects/image_edge_detection/src/nonMaxSup.cpp",
+  "output": "CMakeFiles/ced.dir/src/nonMaxSup.cpp.obj"
+},
+{
+  "directory": "C:/Users/red93/Desktop/projects/image_edge_detection/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/ced.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\ced.dir\\src\\sobel.cpp.obj -c C:\\Users\\red93\\Desktop\\projects\\image_edge_detection\\src\\sobel.cpp",
+  "file": "C:/Users/red93/Desktop/projects/image_edge_detection/src/sobel.cpp",
+  "output": "CMakeFiles/ced.dir/src/sobel.cpp.obj"
+},
+{
+  "directory": "C:/Users/red93/Desktop/projects/image_edge_detection/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/ced.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\ced.dir\\src\\threshhold.cpp.obj -c C:\\Users\\red93\\Desktop\\projects\\image_edge_detection\\src\\threshhold.cpp",
+  "file": "C:/Users/red93/Desktop/projects/image_edge_detection/src/threshhold.cpp",
+  "output": "CMakeFiles/ced.dir/src/threshhold.cpp.obj"
+}
+]
