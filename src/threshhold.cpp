@@ -1,23 +1,29 @@
 #include "../header/threshhold.hpp"
 #include <iostream>
 
-using namespace std;
-
 unsigned char* applyThreshhold(unsigned char* image, int width, int height) {
+    /*
+    We first calculate the average intensity
+    Since a lot of the pixel are zero
+    n = pixel > 0
+    */
     unsigned char* output = new unsigned char[width * height];    
     float sum = 0;
-    float sumAll = 0;
+    float n = 0;
 
     for (int i = 0; i < width * height; i++) {
         sum += image[i];
         if (image[i] != 0) {
-            sumAll++;
+            n++;
         }
     }
-    float averageIntensity = sum / sumAll;
+    float averageIntensity = sum / n;
 
-    std::cout << averageIntensity * 2.5 << std::endl;
-
+    /*
+    Anything above average * 2.5 are strong pixel (255)
+    Anything above average is weak (20)
+    Everything else = 0
+    */
     for (int i = 0; i < width * height; i++) {
         if (image[i] >= averageIntensity * 2.5) {
             output[i] = 255;
@@ -33,41 +39,45 @@ unsigned char* applyThreshhold(unsigned char* image, int width, int height) {
 }
 
 unsigned char* edgeLinking(unsigned char* image, int width, int height) {
+    /*
+    This is pretty much the same things with applying kernel but instead we are checking
+    if the selected pixel neighbor is a strong pixel (255)
+    */
     unsigned char* output = new unsigned char[width * height];
     int nx, ny;
-    int pixelIndex;
+    int imageIndex;
 
     memcpy(output, image, width * height);
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelIndex = (y * width + x);
-            if (image[pixelIndex] == 20) {
+    for (int y = 1; y < height - 1; y++) {
+        for (int x = 1; x < width - 1; x++) {
+            imageIndex = (y * width + x);
+            if (image[imageIndex] == 20) {
                 
                 for (int edgeY = -1; edgeY <= 1; edgeY++) {
                     for (int edgeX = -1; edgeX <= 1; edgeX++) {
                         nx = edgeX + x;
                         ny = edgeY + y;    
-
+                        
+                        //We don't want to check the selected pixel with itself
                         if (edgeX == 0 && edgeY == 0) continue;
 
-                        if (nx >= 0 && ny >= 0 && nx < width && ny < height) {
-                            if (image[ny * width + nx] == 255) {
-                                output[pixelIndex] = 255;
-                                break;
-                            }
-                            else {
-                                output[pixelIndex] = 0;
-                            }
+                        //If ANY of the neighbor is a strong pixel, we can just break the loop and can check the next pixel
+                        if (image[ny * width + nx] == 255) {
+                            output[imageIndex] = 255;
+                            break;
+                        }
+                        else {
+                            output[imageIndex] = 0;
                         }
                     }
-                    if (output[pixelIndex] == 255) {
+                    //Same thing, if any neighbor is strong, can break the loop and can check the next pixel
+                    if (output[imageIndex] == 255) {
                         break;
                     }
                 }
             }
         }
     }
-
     return output;
 }

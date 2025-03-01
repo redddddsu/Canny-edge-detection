@@ -2,40 +2,35 @@
 
 
 void generateGaussian(float kernel[KERNEL_SIZE][KERNEL_SIZE], int kSize, float sigma) {
-    //Gaussian kernel needs to start from the center and move outwards
-    //Where the center is the largest number and it get progressively smaller as it move outwards
+    /*
+    The gaussian kernel is generated where the largest value is in the center
+    As we move farther from the center, the values becomes smaller and smaller
 
+    In a matrix, we can think of [0][0] as the center
+    The right and left of the center would be [0][-1] and [0][1]
+    */
     int center = kSize / 2;
     float value;
-    float sum = 0.0f;
 
     for (int y = -center; y <= center; y++) {
         for (int x = -center; x <= center; x++) {
             value = expf(-(x * x + y * y) / (2 * sigma * sigma)) / (2 * M_PI * sigma * sigma);
             kernel[y + center][x + center] = value;
-            sum += value;
-        }
-    }
-
-    //Normalize so the values doesnt get too large
-    for (int y = -center; y <= center; y++) {
-        for (int x = -center; x <= center; x++) {
-            kernel[y + center][x + center] /= sum;
         }
     }
 }
 
 unsigned char* applyGaussianKernel(float kernel[KERNEL_SIZE][KERNEL_SIZE], int kSize, unsigned char *image, int width, int height) {
+    /*
+    We use convolution to blur the image
+    First apply the gaussian kernel
+    Then find the sum of the neigbhors around it
+    */
     int center = kSize / 2;
     int weightedSum = 0;
     int py, px;
-    int imageIndex, outputIndex;
+    int neigbhorIndex;
     unsigned char *output = new unsigned char[width * height];
-
-
-    //We need to first check the boundaries of the pixels around the original image
-    //Can do this by getting the location pixel of the original image, then adding the position of the kernel to see if 
-    //It goes out of bounds
 
     //Literate through every pixel
     for (int y = 0; y < height; y++) {
@@ -43,33 +38,33 @@ unsigned char* applyGaussianKernel(float kernel[KERNEL_SIZE][KERNEL_SIZE], int k
             
             weightedSum = 0;
 
-            //Literate through the kernel
+            /*
+            With the selected pixel, we are looking for the neighbors around it depending
+            on the size of the gaussian kernel
+            */
             for (int ky = -center; ky <= center; ky++) {
                 for (int kx = -center; kx <= center; kx++) {
                     px = x + kx;
                     py = y + ky;
 
-                    //boundary check
+                    //Boundary check
                     if (px >= 0 && py >= 0 && px < width && py < height) {
 
-                        //get the image pixel index
-                        imageIndex = (py * width + px);
+                        //This would get the index of the neighbor of the selected pixel
+                        neigbhorIndex = (py * width + px);
 
-                        //convulotion
-                        weightedSum += image[imageIndex] * kernel[ky + center][kx + center];    
+                        //Convulotion
+                        weightedSum += image[neigbhorIndex] * kernel[ky + center][kx + center];    
                     }
-
-
                 }
             }
 
-            outputIndex = (y * width + x);
-
+            //Out of bounds check
             if (weightedSum > 255) {
                 weightedSum = 225;
             }
 
-            output[outputIndex] = weightedSum;
+            output[y * width + x] = weightedSum;
         }
     }
 
